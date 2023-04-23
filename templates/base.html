@@ -1,0 +1,47 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}PROGNOZA{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-inverse" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Ocena zagrożenia zawałami - wskaźniki CRFp i CRFm </a> 
+        </div>
+                <div>
+                <ul class="nav navbar-nav navbar-right">
+                {% if current_user.is_authenticated %}
+                <li><a href="{{ url_for('logout') }}">Wyloguj</a></li>
+                {% else %}
+                <li><a href="{{ url_for('formula_logo') }}">Zaloguj się</a></li>
+                {% endif %}
+               </ul></div>
+
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                {% if current_user.is_authenticated %}
+                {% set style="color:green" %}
+                {% else %}
+                {% set style="color:red" %}
+                {% endif %}
+                <li><a href="/">Strona główna</a></li>
+                <li><a href="/database" style={{style}}>Wykonane oceny</a></li>
+                <li><a href="/formularz2">Prognoza - formularz</a></li>
+                <li><a href="/form_ex">Dodatkowe funkcje #test</a></li>
+                <li><a href="/logo">Logowanie</a></li>
+                
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block content %}
+{% endblock %}

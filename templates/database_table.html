@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Wykonane pomiary{% endblock %}
+{% block content %}
+<p class="lead alert alert-warning">Tabela zawiera wszystkie wykonane pomiary
+      <strong>{{ style }}</strong> od roku 2023.</p>
+
+<p class="ml-4"><a href="{{ url_for('index') }}">Powrót do strony głównej</a></p>
+
+  <table class="table">
+      <tr>
+          <th>Miejsce</th>
+          <th>CRFp</th>
+          <th>CFRm</th>
+      </tr>
+
+      {% for mark in marks %}
+      <tr>
+          <td>{{ mark.place }}</td>
+          <td>{{ mark.CRFp }}</td>
+          <td>{{ mark.CRFm }}</td>
+      </tr>
+      {% endfor %}
+  </table>
+  {% endblock %}
