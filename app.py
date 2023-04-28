@@ -16,7 +16,10 @@ from flask_sqlalchemy import SQLAlchemy
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'abcd'
+
+#config block  or app.config['SECRET_KEY'] = 'abcd'
+from config import config
+app.config.from_object(config['test'])
 
 #bootstrap
 bootstrap = Bootstrap(app)
