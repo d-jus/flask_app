@@ -6,7 +6,7 @@ from wtforms.validators import DataRequired
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, login_required, LoginManager, login_user, logout_user
 
-from neural_network.compute import compute
+from neural_network import compute
 
 import os, sys
 from datetime import datetime
@@ -68,6 +68,12 @@ class WForm(FlaskForm):
     input_8 = StringField('Wskaźnik nr 8')
     input_9 = StringField('Wskaźnik nr 9')
     input_10 = StringField('Wskaźnik nr 10')
+    input_11 = StringField('Wskaźnik nr 11')
+    input_12 = StringField('Wskaźnik nr 12')
+    input_13 = StringField('Wskaźnik nr 13')
+    input_14 = StringField('Wskaźnik nr 14')
+    input_15 = StringField('Wskaźnik nr 15')
+    input_16 = StringField('Wskaźnik nr 16')
     submit = SubmitField('COMPUTE')
 
 class User(UserMixin,db.Model):
@@ -101,18 +107,19 @@ def form_ex_():
     if form_ex.validate_on_submit():
         print("TU patrz", form_ex.data.keys())
         print("TU patrz", list(form_ex.data.values())[:-2])
+        CRFp = compute.compute_p(form_ex)
+        CRFm = compute.compute_m(form_ex)
         try:
-            computation = compute(form_ex)   # from neural network - temp
             print('działa - zapisano do bazy')
             db.session.add(
                 Prediction(
                 place = f'test {datetime.now().strftime("%H:%M:%S")}',
-                CRFp = computation,
-                CRFm = computation
+                CRFp = CRFp, # from neural network - temp
+                CRFm = CRFm # from neural network - temp
                 )
             )
             db.session.commit()
-            flash(f"{list(form_ex.data.values())[:-2]}, suma: {computation}",  'alert alert-warning')
+            flash(f"{list(form_ex.data.values())[:-2]}, wskaźniki: {CRFp}, {CRFm}",  'alert alert-warning')
             flash(list(form_ex.data.values())[:-2], 'alert alert-success')
             flash(list(form_ex.data.values())[:-2], 'alert alert-danger')
         except:
