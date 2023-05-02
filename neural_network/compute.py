@@ -141,6 +141,25 @@ variables = {'PRE':{
     ]
     }}
 
+min_max_ = {
+    0 : {'name':'nr1', 'min': 0, 'max':1},
+    1 : {'name':'nr2', 'min': 0, 'max':1},
+    2 : {'name':'nr3', 'min': 0, 'max':1},
+    3 : {'name':'nr4', 'min': 0, 'max':1},
+    4 : {'name':'nr5', 'min': 0, 'max':1},
+    5 : {'name':'nr6', 'min': 0, 'max':1},
+    6 : {'name':'nr7', 'min': 0, 'max':1},
+    7 : {'name':'nr8', 'min': 0, 'max':1},
+    8 : {'name':'nr9', 'min': 0, 'max':1},
+    9 : {'name':'nr10', 'min': 0, 'max':1},
+    10 : {'name':'nr11', 'min': 0, 'max':1},
+    11 : {'name':'nr12', 'min': 0, 'max':1},
+    12 : {'name':'nr13', 'min': 0, 'max':1},
+    13 : {'name':'nr14', 'min': 0, 'max':1},
+    14 : {'name':'nr15', 'min': 0, 'max':1},
+    15 : {'name':'nr16', 'min': 0, 'max':1}
+    }
+
 def compute_p(input,fun = _pre):
     "imput: form type"
     try:

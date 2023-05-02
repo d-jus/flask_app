@@ -5,7 +5,7 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, login_required, LoginManager, login_user, logout_user
-
+from neural_network.display import display_error
 from neural_network import compute
 
 import os, sys
@@ -107,9 +107,9 @@ def form_ex_():
     if form_ex.validate_on_submit():
         print("TU patrz", form_ex.data.keys())
         print("TU patrz", list(form_ex.data.values())[:-2])
-        CRFp = compute.compute_p(form_ex)
-        CRFm = compute.compute_m(form_ex)
         try:
+            CRFp = compute.compute_p(form_ex)
+            CRFm = compute.compute_m(form_ex)
             print('działa - zapisano do bazy')
             db.session.add(
                 Prediction(
@@ -122,6 +122,7 @@ def form_ex_():
             flash(f"{list(form_ex.data.values())[:-2]}, wskaźniki: {CRFp}, {CRFm}",  'alert alert-warning')
             flash(list(form_ex.data.values())[:-2], 'alert alert-success')
             flash(list(form_ex.data.values())[:-2], 'alert alert-danger')
+            flash(display_error(list(form_ex.data.values())[:-2]), 'alert alert-danger') # dodałęm
         except:
             print('nie działa')
             flash(sys.exc_info()[1],'alert alert-danger')
