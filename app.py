@@ -5,7 +5,7 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, login_required, LoginManager, login_user, logout_user
-from neural_network.display import display_error
+from neural_network.display import display_error, check_crfp, check_crfm
 from neural_network import compute
 
 import os, sys
@@ -96,7 +96,6 @@ class User(UserMixin,db.Model):
     def __repr__(self):
         return f'<User {self.username} oraz hasło {self.password_hash}>'
 
-
 @app.route('/')
 def index():
     return redirect(url_for('formula_logo'))
@@ -105,11 +104,17 @@ def index():
 def form_ex_():
     form_ex = WForm()
     if form_ex.validate_on_submit():
+        in_keys = form_ex.data.keys()
+        input_list = list(form_ex.data.values())[:-2]
         print("TU patrz", form_ex.data.keys())
-        print("TU patrz", list(form_ex.data.values())[:-2])
+        print("TU patrz 1a", list(form_ex.data.values())[:-2])
         try:
-            CRFp = compute.compute_p(form_ex)
-            CRFm = compute.compute_m(form_ex)
+            if check_crfm(in_keys,input_list):
+                CRFm = compute.compute_m(form_ex)
+            else: CRFm = None
+            if check_crfp(in_keys,input_list):
+                CRFp = compute.compute_p(form_ex)
+            else: raise Exception('nie obliczono')
             print('działa - zapisano do bazy')
             db.session.add(
                 Prediction(

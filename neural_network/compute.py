@@ -163,10 +163,15 @@ min_max_ = {
 def compute_p(input,fun = _pre):
     "imput: form type"
     try:
-        x = [float(x) for x in list(input.data.values())[:-6]]        # do poprawienia
+        x = list(input.data.values())[:-2]
+        del x[10]
+        del x[10]
+        del x[10]
+        del x[10]
+        x = [float(xx) for xx in x]        # do poprawienia
         return fun(x)
     except:
-        raise Exception('wpisano błędne dane')
+        raise Exception('wpisano błędne dane w CRFp')
     
 def compute_m(input, fun = _mu):
     "imput: form type"
@@ -174,7 +179,7 @@ def compute_m(input, fun = _mu):
         y = [float(x) for x in list(input.data.values())[:-2]]
         return fun(y)
     except:
-        raise Exception('wpisano błędne dane')
+        raise Exception('wpisano błędne dane w CRFm')
     
 if __name__ == __name__:
     assert _pre([56,	9.1,	0,	0.3,	0.5,	0.6,	20,	20,	30,	1.1,	0,	0]) == 0.9247
