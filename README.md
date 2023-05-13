@@ -19,3 +19,7 @@ Założeniem opracowania aplikacji desktopowej (`/d-jus/APP`), była obsługa ap
 - bezpieczne połączenia z serwerem,
 - walidacja formularze,
 - i wiele innych ...
+
+![photo](app_screen_1.jpg)
+![photo](app_screen_2.jpg)
+![photo](app_screen_3.jpg)
