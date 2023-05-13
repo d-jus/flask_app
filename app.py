@@ -1,7 +1,7 @@
 from flask import Flask, render_template, session, redirect, url_for, flash, request
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, FloatField
 from wtforms.validators import DataRequired
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, login_required, LoginManager, login_user, logout_user
@@ -56,24 +56,24 @@ def make_shell_context():
 class NameForm(FlaskForm):
     name = StringField('Podaj wartości wskaźników?', validators=[DataRequired()])
     submit = SubmitField('Oblicz wartość wskaźników')
-
-class WForm(FlaskForm):
-    input_1 = StringField('Wskaźnik nr 1')
-    input_2 = StringField('Wskaźnik nr 2')
-    input_3 = StringField('Wskaźnik nr 3')
-    input_4 = StringField('Wskaźnik nr 4')
-    input_5 = StringField('Wskaźnik nr 5')
-    input_6 = StringField('Wskaźnik nr 6')
-    input_7 = StringField('Wskaźnik nr 7')
-    input_8 = StringField('Wskaźnik nr 8')
-    input_9 = StringField('Wskaźnik nr 9')
-    input_10 = StringField('Wskaźnik nr 10')
-    input_11 = StringField('Wskaźnik nr 11')
-    input_12 = StringField('Wskaźnik nr 12')
-    input_13 = StringField('Wskaźnik nr 13')
-    input_14 = StringField('Wskaźnik nr 14')
-    input_15 = StringField('Wskaźnik nr 15')
-    input_16 = StringField('Wskaźnik nr 16')
+class WForm(FlaskForm): 
+    massage = "Wymagane dane do obliczenia CRFp"
+    input_1 = FloatField('Wskaźnik nr 1', validators =[DataRequired(message=massage)])
+    input_2 = FloatField('Wskaźnik nr 2', validators =[DataRequired(message=massage)])
+    input_3 = FloatField('Wskaźnik nr 3', validators =[DataRequired(message=massage)])
+    input_4 = FloatField('Wskaźnik nr 4', validators =[DataRequired(message=massage)])
+    input_5 = FloatField('Wskaźnik nr 5', validators =[DataRequired(message=massage)])
+    input_6 = FloatField('Wskaźnik nr 6', validators =[DataRequired(message=massage)])
+    input_7 = FloatField('Wskaźnik nr 7', validators =[DataRequired(message=massage)])
+    input_8 = FloatField('Wskaźnik nr 8', validators =[DataRequired(message=massage)])
+    input_9 = FloatField('Wskaźnik nr 9', validators =[DataRequired(message=massage)])
+    input_10 = FloatField('Wskaźnik nr 10', validators =[DataRequired(message=massage)])
+    input_11 = FloatField('Wskaźnik nr 11')
+    input_12 = FloatField('Wskaźnik nr 12')
+    input_13 = FloatField('Wskaźnik nr 13')
+    input_14 = FloatField('Wskaźnik nr 14')
+    input_15 = FloatField('Wskaźnik nr 15', validators =[DataRequired(message=massage)])
+    input_16 = FloatField('Wskaźnik nr 16', validators =[DataRequired(message=massage)])
     submit = SubmitField('COMPUTE')
 
 class User(UserMixin,db.Model):
